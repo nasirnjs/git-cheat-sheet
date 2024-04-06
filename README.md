@@ -1,5 +1,5 @@
 
-This breakdown categorizes Git commands into two main groups: PORCELAIN and PLUMBING.
+<h2>Categorizes Git commands into two main groups, PORCELAIN and PLUMBING</h2>
 
 **PORCELAIN**: These are high-level Git commands designed for ease of use and human interaction. They typically provide a more user-friendly interface and are commonly used in everyday Git workflows.
 
