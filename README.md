@@ -1,131 +1,162 @@
-1. **git init**: Initialize a new Git repository.
-   `git init`
 
-2. **git clone**: Clone a repository into a new directory.
-   `git clone <repository_url>`
+This breakdown categorizes Git commands into two main groups: PORCELAIN and PLUMBING.
 
-3. **git add**: Add file contents to the index (staging area) for committing.
-   `git add filename.txt`
+**PORCELAIN**: These are high-level Git commands designed for ease of use and human interaction. They typically provide a more user-friendly interface and are commonly used in everyday Git workflows.
 
-4. **git mv**: Move or rename a file, a directory, or a symlink.
-   `git mv oldfilename.txt newfilename.txt`
+- **Main commands**: Core commands used for common Git operations like adding files, committing changes, pushing to and pulling from remote repositories.
 
-5. **git rm**: Remove files from the working tree and from the index.
-   `git rm filename.txt`
+- **Manipulators**: Commands used for manipulating Git configuration, managing references, and performing other administrative tasks.
 
-6. **git status**: Show the working tree status.
-   `git status`
+- **Interrogators**: Commands used for inspecting the repository, examining history, and gathering information about Git objects and metadata.
 
-7. **git commit**: Record changes to the repository.
-   `git commit -m "Commit message"`
+- **Interactors**: Commands that facilitate interactive Git workflows, such as interactive rebasing, patch staging, and interactive conflict resolution.
 
-8. **git reset**: Reset current HEAD to the specified state.
-   `git reset HEAD filename.txt`
+**PLUMBING**: These are low-level Git commands that provide direct access to Git's internal data structures and functionalities. They are more suitable for scripting and automation purposes and are less commonly used by end-users directly.
 
-9. **git log**: Show commit logs.
-   `git log`
+- **Manipulators**: Commands that directly manipulate Git's internal objects, perform advanced operations, and interact with external systems.
 
-10. **git show**: Show various types of objects.
-    `git show HEAD`
+- **Interrogators**: Commands used for querying Git's internal database, examining object contents, and retrieving information about references and commits.
 
-11. **git branch**: List, create, or delete branches.
-    `git branch new-branch`
+- **Syncing**: Commands used for synchronization and communication with remote repositories and other Git instances.
 
-12. **git checkout**: Switch branches or restore working tree files.
-    `git checkout branch-name`
+- **Internal**: Commands that perform internal operations within Git, such as maintenance tasks, garbage collection, and repository integrity checks.
 
-13. **git merge**: Join two or more development histories together.
-    `git merge branch-name`
+This breakdown provides a comprehensive overview of the types of Git commands available, categorized based on their functionality and usage patterns.
 
-14. **git tag**: Create, list, delete or verify a tag object signed with GPG.
-    `git tag -a v1.0 -m "Version 1.0"`
 
-15. **git fetch**: Download objects and refs from another repository.
-    `git fetch origin`
+**PORCELAIN (82)**:
+- **44 main commands** (e.g., add, commit, push, pull, ...)
+- **11 manipulators** (e.g., config, reflog, replace, ...)
+- **17 interrogators** (e.g., blame, fsck, rerere, ...)
+- **10 interactors**
 
-16. **git pull**: Fetch from and integrate with another repository or a local branch.
-    `git pull origin master`
+**PLUMBING (63)**:
+- **19 manipulators** (e.g., send-email, p4, svn, ...)
+- **21 interrogators** (e.g., cat-file, for-each-ref, ...)
+- **5 syncing**
+- **18 internal**
 
-17. **git push**: Update remote refs along with associated objects.
-    `git push origin master`
+**TOTAL: 145**
 
-18. **git remote**: Manage set of tracked repositories.
-    `git remote add origin <repository_url>`
+## Here are the PORCELAIN Git commands
+  **Main commands**:
+  1. add
+  2. am
+  3. archive
+  4. bisect
+  5. branch
+  6. bundle
+  7. checkout
+  8. cherry-pick
+  9. citool
+  10. clean
+  11. commit
+  12. describe
+  13. diff
+  14. fetch
+  15. format-patch
+  16. gc
+  17. gui
+  18. log
+  19. merge
+  20. mergetool
+  21. mv
+  22. notes
+  23. pull
+  24. push
+  25. rebase
+  26. reset
+  27. revert
+  28. rm
+  29. shortlog
+  30. show
+  31. stash
+  32. status
+  33. submodule
+  34. tag
 
-19. **git submodule**: Initialize, update or inspect submodules.
-    `git submodule add <repository_url>`
+  **Manipulators**:
+  1. config
+  2. credential
+  3. difftool
+  4. filter-branch
+  5. gc
+  6. help
+  7. instaweb
+  8. mergetool
+  9. push
+  10. rebase
+  11. remote
+  12. submodule
+  13. worktree
 
-20. **git diff**: Show changes between commits, commit and working tree, etc.
-    `git diff`
+  **Interrogators**:
+  1. annotate
+  2. blame
+  3. grep
+  4. log
+  5. show
 
-21. **git stash**: Stash the changes in a dirty working directory away.
-    `git stash`
+  **Interactors**:
+  1. add--interactive
+  2. rebase--interactive
+  3. rebase--merge
 
-22. **git bisect**: Use binary search to find the commit that introduced a bug.
-    `git bisect start`
+## Here are all the PLUMBING Git commands
+  **Manipulators**:
+  1.   apply
+  2.   checkout-index
+  3.   commit-tree
+  4.   hash-object
+  5.   index-pack
+  6.   merge-file
+  7.   merge-index
+  8.   mktag
+  9.   mktree
+  10.  pack-objects
+  11.  prune-packed
+  12.  read-tree
+  13.  symbolic-ref
+  14.  unpack-file
+  15.  unpack-objects
+  16.  update-index
+  17.  update-ref
 
-23. **git grep**: Print lines matching a pattern.
-    `git grep "pattern"`
+  **Interrogators**:
+  1.   cat-file
+  2.   diff-index
+  3.   for-each-ref
+  4.   ls-files
+  5.   ls-remote
+  6.   ls-tree
+  7.   merge-base
+  8.   name-rev
+  9.   pack-redundant
+  10.  rev-list
+  11.  rev-parse
+  12.  show-ref
+  13.  unpack-objects
 
-24. **git blame**: Show what revision and author last modified each line of a file.
-    `git blame filename.txt`
+  **Syncing**:
+  1.   fetch-pack
+  2.   send-pack
+  3.   receive-pack
+  4.   upload-archive
+  5.   upload-pack
 
-25. **git cherry-pick**: Apply the changes introduced by some existing commits.
-    `git cherry-pick <commit-hash>`
-
-26. **git revert**: Revert some existing commits.
-    `git revert <commit-hash>`
-
-27. **git rebase**: Reapply commits on top of another base tip.
-    `git rebase master`
-
-28. **git tag**: Create, list, delete or verify a tag object signed with GPG.
-    `git tag -a v1.0 -m "Version 1.0"`
-
-29. **git show-branch**: Show branches and their commits.
-    `git show-branch`
-
-30. **git show-ref**: List references in a local repository.
-    `git show-ref`
-
-31. **git update-ref**: Update the object name stored in a ref safely.
-    `git update-ref refs/heads/test_branch <commit-hash>`
-
-32. **git prune**: Prune all unreachable objects from the object database.
-    `git prune`
-
-33. **git fsck**: Verifies the connectivity and validity of the objects in the database.
-    `git fsck`
-
-34. **git gc**: Cleanup unnecessary files and optimize the local repository.
-    `git gc`
-
-35. **git show-index**: Show packed archive index.
-    `git show-index`
-
-36. **git verify-pack**: Check the connectivity and validity of objects within pack files.
-    `git verify-pack -v .git/objects/pack/pack-name.pack`
-
-37. **git ls-files**: Show information about files in the index and the working tree.
-    `git ls-files`
-
-38. **git rev-parse**: Pick out and massage parameters.
-    `git rev-parse HEAD`
-
-39. **git config**: Get and set repository or global options.
-    `git config --global user.name "Your Name"`
-
-40. **git help**: Display help information about Git commands.
-    `git help commit`
-
-41. **git shortlog**: Summarize git log output.
-    `git shortlog`
-
-42. **git describe**: Give an object a human readable name based on an available ref.
-    `git describe --tags`
-
-43. **git show-branch**: Show branches and their commits.
-    `git show-branch`
-
-44. **git reflog**: Manage reflog information.
-    `git reflog`
+  **Internal**:
+  1.   check-attr
+  2.   check-ignore
+  3.   check-mailmap
+  4.   check-ref-format
+  5.   fmt-merge-msg
+  6.   get-tar-commit-id
+  7.   mailinfo
+  8.   mailsplit
+  9.   mailx
+  10.  patch-id
+  11.  sh-i18n
+  12.  strip-headers
+  13.  verify-commit
+  14.  verify-pack
+  15.  write-tree
