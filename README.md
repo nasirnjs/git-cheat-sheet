@@ -23,10 +23,10 @@ Version control is a system that tracks changes to files over time. It allows de
 
 With version control, developers can:
 
-✅ Save and Track Changes: Every modification to the codebase is recorded, along with who made the change and why.\
-✅ Revert to Previous Versions: If a bug is introduced or something breaks, developers can restore the project to an earlier, stable version.
-✅ Collaborate Safely: Multiple developers can work on the same project at the same time without overwriting each other’s work.
-✅ Branch and Merge: Developers can create branches for new features or fixes, work independently, and merge their changes back into the main code when ready.
+- Save and Track Changes: Every modification to the codebase is recorded, along with who made the change and why.\
+- Revert to Previous Versions: If a bug is introduced or something breaks, developers can restore the project to an earlier, stable version.
+- Collaborate Safely: Multiple developers can work on the same project at the same time without overwriting each other’s work.
+- Branch and Merge: Developers can create branches for new features or fixes, work independently, and merge their changes back into the main code when ready.
 
 ### Introduction to Git
 Git is a distributed version control system created by Linus Torvalds in 2005.
@@ -54,7 +54,7 @@ Git provides several powerful features that make it ideal for modern development
 
 
 <p align="center">
-  <img src="image/git-work-flow.jpg" alt="Git Workflow States" width="500" height="550">
+  <img src="image/git-work-flow.jpg" alt="Git Workflow States" width="600" height="650">
 </p>
 
 ### git init (Start of Everything)
@@ -64,10 +64,8 @@ Git provides several powerful features that make it ideal for modern development
 - Creates a hidden .git/ directory.
 
 **What changes**
-- Before git init:
-👉 Folder is just normal files (Git doesn’t know anything)
-- After git init:
-👉 Git starts tracking changes
+- Before git init: Folder is just normal files (Git doesn’t know anything)
+- After git init: Git starts tracking changes
 
 **Key idea**
 - git init turns a normal folder into a Git repository.
