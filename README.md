@@ -1,162 +1,346 @@
 
-<h2>Categorizes Git commands into two main groups, PORCELAIN and PLUMBING</h2>
+## Why Git Exists
 
-**PORCELAIN**: These are high-level Git commands designed for ease of use and human interaction. They typically provide a more user-friendly interface and are commonly used in everyday Git workflows.
+- Version Control Philosophy
+- Why version control?
+- Introduction to Git
+- Git vs GitHub
+- How Git stores changes (simple snapshot idea)
 
-- **Main commands**: Core commands used for common Git operations like adding files, committing changes, pushing to and pulling from remote repositories.
+### Version Control Philosophy
+In modern software development, tracking changes, managing multiple versions of code, and collaborating efficiently are essential. These challenges are solved using Version Control Systems (VCS).
+Git is the most widely used version control system in the world, helping developers work confidently on both personal projects and large team-based codebases.
 
-- **Manipulators**: Commands used for manipulating Git configuration, managing references, and performing other administrative tasks.
+Git allows developers to:
+- Track every change made to a project
+- Maintain multiple versions without copying files manually
+- Collaborate smoothly with individuals or teams
 
-- **Interrogators**: Commands used for inspecting the repository, examining history, and gathering information about Git objects and metadata.
+### What Is Version Control?
+Before understanding Git, it’s important to understand version control itself.
 
-- **Interactors**: Commands that facilitate interactive Git workflows, such as interactive rebasing, patch staging, and interactive conflict resolution.
+Version control is a system that tracks changes to files over time. It allows developers to manage the history of a project safely and efficiently.
 
-**PLUMBING**: These are low-level Git commands that provide direct access to Git's internal data structures and functionalities. They are more suitable for scripting and automation purposes and are less commonly used by end-users directly.
+With version control, developers can:
 
-- **Manipulators**: Commands that directly manipulate Git's internal objects, perform advanced operations, and interact with external systems.
+✅ Save and Track Changes: Every modification to the codebase is recorded, along with who made the change and why.\
+✅ Revert to Previous Versions: If a bug is introduced or something breaks, developers can restore the project to an earlier, stable version.
+✅ Collaborate Safely: Multiple developers can work on the same project at the same time without overwriting each other’s work.
+✅ Branch and Merge: Developers can create branches for new features or fixes, work independently, and merge their changes back into the main code when ready.
 
-- **Interrogators**: Commands used for querying Git's internal database, examining object contents, and retrieving information about references and commits.
+### Introduction to Git
+Git is a distributed version control system created by Linus Torvalds in 2005.
 
-- **Syncing**: Commands used for synchronization and communication with remote repositories and other Git instances.
+Unlike centralized systems, Git allows each developer to work on a local copy of the entire project, including its full history. Developers can then share their work by pushing changes to a shared remote repository.
 
-- **Internal**: Commands that perform internal operations within Git, such as maintenance tasks, garbage collection, and repository integrity checks.
+Git provides several powerful features that make it ideal for modern development:
 
-This breakdown provides a comprehensive overview of the types of Git commands available, categorized based on their functionality and usage patterns.
+🔹 Version Tracking: All changes are tracked in a structured history, allowing easy rollbacks to previous versions.
+
+🔹 Collaboration: Multiple developers can work on the same project simultaneously without conflicts.
+
+🔹 Branching: Developers can create separate branches for features, bug fixes, or experiments without affecting the main codebase.
+
+🔹 Distributed System: Each developer has a full copy of the repository, removing dependency on a single central server.
+
+🔹 Commit History (Logs): Git maintains a detailed record of commits, making it easy to understand how and why a project has evolved.
+
+### Git vs GitHub
+- Git is a version control system that runs on your local machine. It tracks code changes, keeps history, and lets you undo mistakes. It works even without internet.
+
+- GitHub is a cloud platform that hosts Git repositories. It lets developers share code, review changes, and collaborate using pull requests and issues.
+
+## Git Workflow States
 
 
-**PORCELAIN (82)**:
-- **44 main commands** (e.g., add, commit, push, pull, ...)
-- **11 manipulators** (e.g., config, reflog, replace, ...)
-- **17 interrogators** (e.g., blame, fsck, rerere, ...)
-- **10 interactors**
+<p align="center">
+  <img src="image/git-work-flow.jpg" alt="Git Workflow States" width="500" height="550">
+</p>
 
-**PLUMBING (63)**:
-- **19 manipulators** (e.g., send-email, p4, svn, ...)
-- **21 interrogators** (e.g., cat-file, for-each-ref, ...)
-- **5 syncing**
-- **18 internal**
+### git init (Start of Everything)
 
-**TOTAL: 145**
+**What it does**
+- Initializes a new Git repository in your project folder.
+- Creates a hidden .git/ directory.
 
-## Here are the PORCELAIN Git commands
-  **Main commands**:
-  1. add
-  2. am
-  3. archive
-  4. bisect
-  5. branch
-  6. bundle
-  7. checkout
-  8. cherry-pick
-  9. citool
-  10. clean
-  11. commit
-  12. describe
-  13. diff
-  14. fetch
-  15. format-patch
-  16. gc
-  17. gui
-  18. log
-  19. merge
-  20. mergetool
-  21. mv
-  22. notes
-  23. pull
-  24. push
-  25. rebase
-  26. reset
-  27. revert
-  28. rm
-  29. shortlog
-  30. show
-  31. stash
-  32. status
-  33. submodule
-  34. tag
+**What changes**
+- Before git init:
+👉 Folder is just normal files (Git doesn’t know anything)
+- After git init:
+👉 Git starts tracking changes
 
-  **Manipulators**:
-  1. config
-  2. credential
-  3. difftool
-  4. filter-branch
-  5. gc
-  6. help
-  7. instaweb
-  8. mergetool
-  9. push
-  10. rebase
-  11. remote
-  12. submodule
-  13. worktree
+**Key idea**
+- git init turns a normal folder into a Git repository.
 
-  **Interrogators**:
-  1. annotate
-  2. blame
-  3. grep
-  4. log
-  5. show
+### .git Directory (Behind the Scenes)
+**What it contains**
 
-  **Interactors**:
-  1. add--interactive
-  2. rebase--interactive
-  3. rebase--merge
+- Complete project history
+- Commits, branches, tags
+- Configuration and metadata
 
-## Here are all the PLUMBING Git commands
-  **Manipulators**:
-  1.   apply
-  2.   checkout-index
-  3.   commit-tree
-  4.   hash-object
-  5.   index-pack
-  6.   merge-file
-  7.   merge-index
-  8.   mktag
-  9.   mktree
-  10.  pack-objects
-  11.  prune-packed
-  12.  read-tree
-  13.  symbolic-ref
-  14.  unpack-file
-  15.  unpack-objects
-  16.  update-index
-  17.  update-ref
+**Important**
+- You never manually edit .git
+- Git reads and writes here automatically
 
-  **Interrogators**:
-  1.   cat-file
-  2.   diff-index
-  3.   for-each-ref
-  4.   ls-files
-  5.   ls-remote
-  6.   ls-tree
-  7.   merge-base
-  8.   name-rev
-  9.   pack-redundant
-  10.  rev-list
-  11.  rev-parse
-  12.  show-ref
-  13.  unpack-objects
+**Key idea**
+- .git is the brain of Git.
 
-  **Syncing**:
-  1.   fetch-pack
-  2.   send-pack
-  3.   receive-pack
-  4.   upload-archive
-  5.   upload-pack
+### Working Tree (Working Directory)
+**What it is**
+- Your actual project files
+- Where you write code, edit files, delete things
 
-  **Internal**:
-  1.   check-attr
-  2.   check-ignore
-  3.   check-mailmap
-  4.   check-ref-format
-  5.   fmt-merge-msg
-  6.   get-tar-commit-id
-  7.   mailinfo
-  8.   mailsplit
-  9.   mailx
-  10.  patch-id
-  11.  sh-i18n
-  12.  strip-headers
-  13.  verify-commit
-  14.  verify-pack
-  15.  write-tree
+**State**
+- Files can be:
+- Modified
+- New (untracked)
+- Deleted
+
+**Key idea**
+- Working tree = your current workspace.
+### Staging Area (Index)
+**What it is**
+- A preparation area before committing
+- You choose what goes into the next commit
+
+**Why it exists**
+- You might change many files
+- But only want to commit some of them
+
+**Key idea**
+- Staging is a “review table” before saving history.
+
+### git add
+
+**What it does**
+- Takes a snapshot of selected file changes
+- Moves them into the staging area
+
+**Important**
+- It does NOT create a commit
+- It prepares content for commit
+
+**Key idea**
+- git add selects what will be recorded.
+
+### Local Repository (Local Branch)
+**What it is**
+- Stored inside .git
+- Contains committed snapshots (history
+
+**Key idea**
+- Local repo = permanent project history on your machine.
+
+
+### git commit
+
+**What it does**
+- Saves a snapshot of staged files
+- Creates a commit object with:
+- Unique hash
+- Author
+- Date
+- Commit message
+
+**Best practice**
+- One logical change per commit
+- Clear message (what & why)
+
+**Key idea**
+- Commit = save point in project history.
+
+### Commit History (git log)
+
+**What it shows**
+- Timeline of project changes
+- Ordered list of commits
+
+**Key idea**
+- Git history tells the story of your project.
+
+### Remote Repository
+**What it is**
+- Central shared repository
+- Usually hosted on GitHub, GitLab, Bitbucket
+
+**Purpose**
+- Collaboration
+- Backup
+- Code sharing
+
+**Key idea**
+- Remote repo is for sharing, not required for Git to work.
+
+
+### Remote Branch (origin/main)
+**What it represents**
+- Actual branch on the remote server
+
+**Key idea**
+- Remote branch lives on the server
+
+### Remote-Tracking Branch
+
+**What it is**
+- Local reference of remote branch
+- Read-only pointer
+
+**Key idea**
+- Remote-tracking branch shows “what the remote looks like”.
+
+### git push
+**What it does**
+- Sends local commits to remote repository
+
+**Key idea**
+- Push = publish your work.
+
+### git fetch
+**What it does**
+- Downloads changes from remote
+- Does NOT modify your working files
+
+**Key idea**
+- Fetch = check what others have done.
+
+### git pull
+
+**What it does**
+- git fetch + git merge
+- Updates your local branch and working tree
+
+**Key idea**
+- Pull = update your local work.
+
+
+### git checkout
+**What it does**
+- Switch branches
+- Restore files
+
+**Key idea**
+- Checkout = move between versions.
+
+### git merge / git rebase
+**Purpose**
+- Combine changes from different branches
+
+**Merge**
+- Keeps history
+- Creates a merge commit
+
+**Rebase**
+- Rewrites history
+- Cleaner linear timeline
+
+**Key idea**
+- Merge joins histories, rebase rewrites them.
+
+
+## Daily Git Commands
+- Working directory
+- Staging
+- Repository
+- The Art of the Commit Message
+- Git Config & Aliases
+
+```bash
+git init
+git status
+git config
+git config --global --list
+git config --global alias.lg "log --oneline --graph --decorate"
+git add
+git commit
+git log
+git log --oneline --graph
+git show
+git log -p
+git log --stat
+git diff
+.gitignore
+```
+## Undo Without Fear
+- Local mistake vs shared mistake
+
+```bash
+git restore
+git checkout -- file
+git commit --amend
+git reset
+git revert
+```
+
+## Branching (Real Life Use)
+- Why branches exist
+- Feature branch idea
+- main vs feature branch
+- The Special HEAD Pointer
+- Rebase
+
+```bash
+git branch
+git checkout -b
+git merge
+git merge --ff-only
+git switch
+git rebase main
+git pull --rebase
+git rebase -i
+
+```
+
+## GitHub / GitLab Workflow
+- Local vs remote
+- origin
+- clone vs fork
+- Pull Request Workflow
+
+```bash
+git clone
+git remote -v
+git push
+git push -u origin
+git pull
+git fetch
+git remote add
+git branch -vv
+```
+
+## Stash + Real Scenarios
+- The Stash Stack
+- When to Stash vs. Commit
+- Cleaning the Working Directory
+- Used for hotfixes & selective commits
+
+```bash
+git stash
+git stash pop
+git stash list
+git stash -u
+git clean -fd
+git cherry-pick <commit-id>
+```
+
+## How Teams Use Git (DevOps Angle)
+- Feature branch workflow
+- Gitflow (only concept)
+- Trunk-based (CI/CD teams)
+- Git as source of truth
+- Git + Jenkins / GitHub Actions
+- Intro to GitOps (high level)
+- Tags & Releases (DevOps / CI/CD Must)
+- Advanced Debugging & Recovery
+
+```bash
+git tag
+git tag -a v1.0 -m "Release v1.0"
+git push origin --tags
+git describe
+git log --grep="bug"
+git log -S "password"
+git shortlog
+git blame file.txt
+git reflog
+```
