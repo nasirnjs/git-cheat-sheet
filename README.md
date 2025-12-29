@@ -241,24 +241,83 @@ Git provides several powerful features that make it ideal for modern development
 - Staging
 - Repository
 - The Art of the Commit Message
-- Git Config & Aliases
-
+- Git Config 
+- 
+**Initialize a new Git repository.**
+Initialize a new Git repository. it will be Creates a hidden .git/ directory
 ```bash
 git init
-git status
-git config
-git config --global --list
-git config --global alias.lg "log --oneline --graph --decorate"
-git add
-git commit
-git log
-git log --oneline --graph
-git show
-git log -p
-git log --stat
-git diff
-.gitignore
 ```
+Check the state of files (modified, staged, untracked). Shows what’s changed and what’s ready to commit.
+```bash
+git status
+```
+
+Set username & email, Sets your Git username for all repositories on your system.Personal laptop, same name/email used for most projects
+```bash
+git config --global user.name "Nasir Uddin"
+git config --global user.email "nasir@example.com"
+```
+Sets username only for the current repository, Multiple Git identities (work vs personal)
+```bash
+git config user.name "Nasir Uddin"
+git config user.email "nasir@example.com"
+```
+
+View all global config.
+```bash
+git config --global --list
+```
+Displays effective configuration for the current repository.
+```bash
+git config --list
+```
+Remove a specific global config (recommended)
+```bash
+git config --global --unset user.name
+git config --global --unset user.email
+```
+Moves changes from working directory to staging area, **.** add everything and Select changes for next commit.
+```bash
+git add app.py
+git add .
+```
+Saves staged changes into the repository history and Permanently save staged changes.
+```bash
+git commit -m "Add user login validation"
+```
+Shows full commit history,Shows commit ID, Author name & email, Date and Commit message.
+```bash
+git log
+
+```
+Compact, visual commit history,One line per commit and Graph shows branches and merges
+```bash
+git log --oneline --graph
+```
+Shows details of a specific commit
+```bash
+git show a1b2c3d
+```
+Shows commit history with code changes,-p means patch, shows code diffs for each commit,useful for deep review
+```bash
+git log -p
+```
+
+Summary of file changes per commit, Shows which files changed shows number of lines added/removed
+```bash
+git log --stat
+```
+
+```bash
+vim .gitignore
+
+node_modules/
+.env
+*.log
+dist/
+```
+
 ## Undo Without Fear
 - Local mistake vs shared mistake
 
