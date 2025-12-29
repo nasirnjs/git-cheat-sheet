@@ -242,8 +242,7 @@ Git provides several powerful features that make it ideal for modern development
 - Repository
 - The Art of the Commit Message
 - Git Config 
-- 
-**Initialize a new Git repository.**
+   
 Initialize a new Git repository. it will be Creates a hidden .git/ directory
 ```bash
 git init
