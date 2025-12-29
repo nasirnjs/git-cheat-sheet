@@ -308,7 +308,7 @@ Summary of file changes per commit, Shows which files changed shows number of li
 ```bash
 git log --stat
 ```
-
+Files Git should NOT track
 ```bash
 vim .gitignore
 
