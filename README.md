@@ -318,15 +318,15 @@ dist/
 ```
 ---
 ## Undo Without Fear
-- Local mistake vs shared mistake
 
-
-You jump into that commit’s code immediately, Code looks exactly like that commit.
+You jump into that commit’s code immediately, Code looks exactly like that commit. *revert* Git will open your editor with a commit message.
 ```bash
 git log --oneline --graph
+git log --oneline
 git checkout d3bf479
 git brach
 git checkout main
+git revert 017cb9f
 ```
 
 Used to discard changes in the working directory or staging area. File is restored from the last commit.
