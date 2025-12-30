@@ -235,7 +235,7 @@ Git provides several powerful features that make it ideal for modern development
 **Key idea**
 - Merge joins histories, rebase rewrites them.
 
-
+---
 ## Daily Git Commands
 - Working directory
 - Staging
@@ -316,16 +316,42 @@ node_modules/
 *.log
 dist/
 ```
-
+---
 ## Undo Without Fear
 - Local mistake vs shared mistake
 
+
+You jump into that commit’s code immediately, Code looks exactly like that commit.
 ```bash
-git restore
-git checkout -- file
+git log --oneline --graph
+git checkout d3bf479
+git brach
+git checkout main
+```
+
+Used to discard changes in the working directory or staging area. File is restored from the last commit.
+```bash
+git restore README.md
+```
+
+Used to modify the last commit,Opens editor and Lets you change commit message. If already pushed, use *--force*
+```bash
 git commit --amend
+git push --force
+```
+
+Risky, Moves HEAD and optionally clears staging & working directory. Removes last commit and Changes stay staged.
+```bash
 git reset
-git revert
+```
+Soft reset (keep changes staged), Removes last commit and Changes stay staged.
+```bash
+git reset --soft HEAD~1
+```
+
+Hard reset (DANGEROUS) removes last commit. Deletes all local changes and use only if you are 100% sure.
+```bash
+git reset --hard HEAD~1
 ```
 
 ## Branching (Real Life Use)
