@@ -344,12 +344,12 @@ Risky, Moves HEAD and optionally clears staging & working directory. Removes las
 ```bash
 git reset
 ```
-Soft reset (keep changes staged), Removes last commit and Changes stay staged.
+Soft reset (keep changes staged), Moves HEAD to a specific commit but keeps all changes staged..
 ```bash
 git reset --soft HEAD~1
 ```
 
-Hard reset (DANGEROUS) removes last commit. Deletes all local changes and use only if you are 100% sure.
+Hard reset (DANGEROUS) removes last commit. Moves HEAD to a specific commit and discards all changes in staging and working directory. Deletes all local changes and use only if you are 100% sure.
 ```bash
 git reset --hard HEAD~1
 ```
@@ -361,17 +361,98 @@ git reset --hard HEAD~1
 - The Special HEAD Pointer
 - Rebase
 
+Lists, creates, or deletes branches, View active feature branches, Check where you are before merging or rebasing.
 ```bash
 git branch
-git checkout -b
-git merge
-git merge --ff-only
-git switch
-git rebase main
-git pull --rebase
-git rebase -i
+```
+
+Creates and switches to a new branch, Create a feature branch from main. *feature/login* is a naming convention, not a requirement.
+```bash
+git checkout -b feature/login
+```
+
+Combines another branch into your current branch. Merge branch *feature/login* into main.
+
+```bash
+git checkout main
+git merge feature/login
+```
+
+Allows merge only if fast-forward is possible. fast-forward merge happens when Git does NOT need to create a new commit to merge a branch.
+```bash
+git checkout main
+git merge --ff-only feature/login
+```
+
+**conflict / no–fast-forward scenario**
+```bash
+# start clean
+git checkout main
+git commit -am "main commit 1"
+
+# switch to feature branch (IMPORTANT)
+git switch feature/login
+
+echo "from feature" >> app.py
+git add app.py
+git commit -m "feature modifies app.py"
+
+# go back to main
+git switch main
+echo "from main" >> app.py
+git add app.py
+git commit -m "main modifies app.py"
+
+# now try ff-only
+git merge --ff-only feature/login
 
 ```
+*Note: A branch only moves when you commit on that branch*
+
+Quick checklist to create merge error / no fast-forward
+```bash
+git branch --show-current
+git log --oneline --decorate --graph --all
+```
+
+Resolve the conflict and continue rebase.
+```bash
+git checkout feature/login
+git rebase main
+git add app.py
+git rebase --continue
+```
+
+*--continue* Continue the rebase *--skip* If the commit in conflict is not important or you want to ignore it, *abort--* f you want to undo the rebase entirely and go back to the state before rebase.
+```bash
+git rebase --continue
+git rebase --skip
+git rebase --abort
+```
+
+Modern and safer replacement for checkout (branch switching only) **-c** Create + switch.
+```bash
+git switch feature/login
+git switch -c feature/search
+```
+
+Downloads commits, branches, and tags from a remote without changing your working files. Does not merge or rebase automatically.
+```bash
+git fetch origin
+```
+Fetches the remote branch (origin/main) and then rebases your *current branch* on top of it.
+```bash
+git pull --rebase origin main
+```
+
+This will move your branch back to that commit.
+```bash
+git log --oneline
+git reflog
+git switch feature/login
+git reset --hard 6d61c15
+```
+
 
 ## GitHub / GitLab Workflow
 - Local vs remote
@@ -379,16 +460,47 @@ git rebase -i
 - clone vs fork
 - Pull Request Workflow
 
+Adds a new remote repository to your project
 ```bash
-git clone
-git remote -v
-git push
-git push -u origin
-git pull
-git fetch
-git remote add
-git branch -vv
+git remote add origin git@github.com:nasirnjs/git-test.git
+git push origin main
 ```
+
+Copies a remote repository to your local machine
+```bash
+git clone https://github.com/yourusername/myproject.git
+```
+
+Shows the remote repositories and URLs
+```bash
+git remote -v
+git branch -v --verbose
+
+```
+
+Sends your local commits to the remote repository
+```
+git push
+```
+
+Pushes a new local branch to remote and sets upstream
+```bash
+git switch -c feature/login
+git push -u origin feature/login
+```
+
+Fetches changes from the remote and merges into your current branch. *--rebase* Updates your local branch with latest commits from main
+```bash
+git pull origin main
+git pull --rebase origin main
+```
+
+Downloads commits/branches without merging into your local branch
+```bash
+git fetch origin
+```
+
+
 
 ## Stash + Real Scenarios
 - The Stash Stack
@@ -405,24 +517,34 @@ git clean -fd
 git cherry-pick <commit-id>
 ```
 
-## How Teams Use Git (DevOps Angle)
-- Feature branch workflow
-- Gitflow (only concept)
-- Trunk-based (CI/CD teams)
-- Git as source of truth
-- Git + Jenkins / GitHub Actions
-- Intro to GitOps (high level)
-- Tags & Releases (DevOps / CI/CD Must)
-- Advanced Debugging & Recovery
-
+Temporarily saves your uncommitted changes (both staged and unstaged).Restores your working directory to the last commit. Useful when you want to switch branches without committing incomplete work
 ```bash
-git tag
-git tag -a v1.0 -m "Release v1.0"
-git push origin --tags
-git describe
-git log --grep="bug"
-git log -S "password"
-git shortlog
-git blame file.txt
-git reflog
+echo "temporary change" >> app.py
+git status
+git stash
+git status
+```
+Restores the most recent stashed changes back to your working directory
+```bash
+git stash pop
+```
+
+Listing and Applying Specific Stashes. Shows all stashed changes and Use the index {0}, {1} to apply a specific stash.
+```bash
+git stash list
+git stash pop 1
+```
+Stashing Untracked Files. Include new files in your stash using -u (or --include-untracked).
+```bash
+echo "new file" > newfile.txt
+git stash -u
+git stash list
+```
+
+Apply specific commits from another branch without merging the full branch. Useful for backporting fixes or picking only certain changes.
+```bash
+git checkout main
+git log --oneline
+git cherry-pick 4b6a61f
+git cherry-pick 4b6a61f eda0b43
 ```
