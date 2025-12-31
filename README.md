@@ -281,10 +281,20 @@ Moves changes from working directory to staging area, **.** add everything and S
 git add app.py
 git add .
 ```
-Saves staged changes into the repository history and Permanently save staged changes.
+- Saves staged changes into the repository history and Permanently save staged changes.
+- Professional good commit message(Recommended Standard)
+
+```bash
+git commit -m "Add user login validation"
+git commit -m "Fix API timeout issue on checkout"
+git commit -m "Update Dockerfile for multi-stage build"
+git commit -m "Refactor authentication service"
+```
+
 ```bash
 git commit -m "Add user login validation"
 ```
+
 Shows full commit history,Shows commit ID, Author name & email, Date and Commit message.
 ```bash
 git log
@@ -308,6 +318,9 @@ Summary of file changes per commit, Shows which files changed shows number of li
 git log --stat
 ```
 Files Git should NOT track
+- Only affects untracked files
+- Cannot ignore files already committed
+- Best added at the start of a project
 ```bash
 vim .gitignore
 
@@ -316,7 +329,15 @@ node_modules/
 *.log
 dist/
 ```
----
+
+## git diff (See Changes Before Commit) 
+- *diff* working directory vs staging *--staged*staging vs last commit *HEAD*everything since last commit.
+```bash
+git diff          
+git diff --staged
+git diff HEAD
+```
+
 ## Undo Without Fear
 
 You jump into that commit’s code immediately, Code looks exactly like that commit. *revert* Git will open your editor with a commit message.
@@ -324,7 +345,7 @@ You jump into that commit’s code immediately, Code looks exactly like that com
 git log --oneline --graph
 git log --oneline
 git checkout d3bf479
-git brach
+git branch
 git checkout main
 git revert 017cb9f
 ```
@@ -341,6 +362,17 @@ git push --force
 ```
 
 Risky, Moves HEAD and optionally clears staging & working directory. Removes last commit and Changes stay staged.
+- HEAD is a pointer to your current position in Git history.
+- Usually points to the current branch
+- Moves when you commit
+- Detached HEAD happens when you checkout a commit, not a branch
+
+**Detached HEAD (Very common confusion)**
+
+- Detached HEAD Warning
+- You are not on a branch
+- Commits may be lost unless you create a branch
+
 ```bash
 git reset
 ```
@@ -507,15 +539,6 @@ git fetch origin
 - When to Stash vs. Commit
 - Cleaning the Working Directory
 - Used for hotfixes & selective commits
-
-```bash
-git stash
-git stash pop
-git stash list
-git stash -u
-git clean -fd
-git cherry-pick <commit-id>
-```
 
 Temporarily saves your uncommitted changes (both staged and unstaged).Restores your working directory to the last commit. Useful when you want to switch branches without committing incomplete work
 ```bash
